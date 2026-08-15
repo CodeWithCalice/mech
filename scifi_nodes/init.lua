@@ -448,7 +448,7 @@ local node_def = {
 		is_ground_content = false,
 		paramtype = "light",
 		paramtype2 = "none",
-		light_source = false,
+		light_source = 0,
 		sounds = sounds,
 	}
 local nodename = "scifi_nodes:blackdmg"
@@ -484,7 +484,7 @@ local node_def = {
 		is_ground_content = false,
 		paramtype = "light",
 		paramtype2 = "facedir",
-		light_source = false,
+		light_source = 0,
 		sounds = sounds,
 	}
 local nodename = "scifi_nodes:black"
@@ -511,7 +511,7 @@ local node_def = {
 		is_ground_content = false,
 		paramtype = "light",
 		paramtype2 = "facedir",
-		light_source = false,
+		light_source = 0,
 		sounds = sounds,
 	}
 local nodename = "scifi_nodes:white2"
@@ -538,7 +538,7 @@ local node_def = {
 		is_ground_content = false,
 		paramtype = "light",
 		paramtype2 = "none",
-		light_source = false,
+		light_source = 0,
 		sounds = sounds,
 	}
 local nodename = "scifi_nodes:blacktile2"
@@ -562,7 +562,7 @@ local node_def = {
 		is_ground_content = false,
 		paramtype = "light",
 		paramtype2 = "facedir",
-		light_source = false,
+		light_source = 0,
 		sounds = sounds,
 	}
 local nodename = "scifi_nodes:dent"
@@ -589,7 +589,7 @@ local node_def = {
 		is_ground_content = false,
 		paramtype = "light",
 		paramtype2 = "facedir",
-		light_source = false,
+		light_source = 0,
 		sounds = sounds,
 	}
 local nodename = "scifi_nodes:lighttop"
@@ -616,7 +616,7 @@ local node_def = {
 		is_ground_content = false,
 		paramtype = "light",
 		paramtype2 = "facedir",
-		light_source = false,
+		light_source = 0,
 		sounds = sounds,
 	}
 local nodename = "scifi_nodes:greenmetal"
@@ -641,7 +641,7 @@ local node_def = {
 		is_ground_content = false,
 		paramtype = "light",
 		paramtype2 = "facedir",
-		light_source = false,
+		light_source = 0,
 		sounds = sounds,
 	}
 local nodename = "scifi_nodes:grey"
@@ -668,7 +668,7 @@ local node_def = {
 		is_ground_content = false,
 		paramtype = "light",
 		paramtype2 = "none",
-		light_source = false,
+		light_source = 0,
 		sounds = sounds,
 	}
 local nodename = "scifi_nodes:grey_square"
@@ -724,7 +724,7 @@ local node_def = {
 		is_ground_content = false,
 		paramtype = "light",
 		paramtype2 = "facedir",
-		light_source = false,
+		light_source = 0,
 		sounds = sounds,
 	}
 local nodename = "scifi_nodes:vent2"
@@ -851,7 +851,7 @@ local node_def = {
 		is_ground_content = false,
 		paramtype = "light",
 		paramtype2 = "facedir",
-		light_source = false,
+		light_source = 0,
 		sounds = sounds,
 	}
 local nodename = "scifi_nodes:greybolts"
@@ -876,7 +876,7 @@ local node_def = {
 		is_ground_content = false,
 		paramtype = "light",
 		paramtype2 = "facedir",
-		light_source = false,
+		light_source = 0,
 		sounds = sounds,
 	}
 local nodename = "scifi_nodes:rough"
@@ -902,7 +902,7 @@ local node_def = {
 		is_ground_content = false,
 		paramtype = "light",
 		paramtype2 = "facedir",
-		light_source = false,
+		light_source = 0,
 		sounds = sounds,
 	}
 local nodename = "scifi_nodes:rust"

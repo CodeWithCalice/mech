@@ -1449,7 +1449,7 @@ for _, v in ipairs({14, 11, 8, 0}) do
 
 	core.register_node("mech:lamp_bar_" .. v, {
 		description = S("Wall lamp (@1)", v),
-		light_source = v,
+		light_source = v or 0,
 		sunlight_propagates = true,
 		tiles = {"lamp_bar.png"},
 		paramtype = "light",
@@ -1515,7 +1515,7 @@ for _, v in ipairs({14, 11, 8, 0}) do
 	core.register_node("mech:lamp_block_" .. v, {
 		description = S("Lamp block (@1)", v),
 		tiles = tiles,
-		light_source = v,
+		light_source = v or 0,
 		groups = {node = 1, cracky = 2},
 		sounds = default.node_sound_glass_defaults(),
 		on_trigger = on_trigger,
