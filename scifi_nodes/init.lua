@@ -1121,7 +1121,5 @@ minetest.register_node("scifi_nodes:grassblk", {
 	light_source = 2,
 	groups = {crumbly=1, oddly_breakable_by_hand=1, soil=1},
 	is_ground_content = false,
-	sounds = scifi_nodes.node_sound_dirt_defaults({
-		footstep = scifi_nodes.node_sound_plant_defaults().footstep,
-	})
+	sounds = default.node_sound_dirt_defaults()
 })
