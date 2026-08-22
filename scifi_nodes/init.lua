@@ -1111,3 +1111,17 @@ if core.get_modpath("signs_api") then
 		},
 	})
 end
+
+-- Grass block from Scifi-nodes mod
+minetest.register_node("scifi_nodes:grassblk", {
+	description = "Dirt With Alien Grass",
+	tiles = {"scifi_nodes_grass_top.png^[colorize:cyan:80", "scifi_nodes_dirt.png",
+		{name = "scifi_nodes_dirt.png^(scifi_nodes_grass_side.png^[colorize:cyan:80)",
+			tileable_vertical = false}},
+	light_source = 2,
+	groups = {crumbly=1, oddly_breakable_by_hand=1, soil=1},
+	is_ground_content = false,
+	sounds = scifi_nodes.node_sound_dirt_defaults({
+		footstep = scifi_nodes.node_sound_plant_defaults().footstep,
+	})
+})
