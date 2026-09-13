@@ -1523,3 +1523,6 @@ for _, v in ipairs({14, 11, 8, 0}) do
 		after_dig_node = mech.after_dig,
 	})
 end
+
+-- Nodes repris de scifi_nodes, enregistres sous le prefixe mech:
+dofile(core.get_modpath("mech") .. "/scifi_nodes.lua")
