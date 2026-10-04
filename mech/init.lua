@@ -340,6 +340,7 @@ core.register_node("mech:button", {
 	paramtype = "light",
 	paramtype2 = "facedir",
 	walkable = false,
+	drop = "mech:button",
 	groups = {node = 1, cracky = 2, trigger = 1},
 	sounds = default.node_sound_metal_defaults(),
 	collision_box = {
@@ -351,13 +352,6 @@ core.register_node("mech:button", {
 		fixed = {{-5/16, -1/4, 1/4, 5/16, 1/4, 1/2}},
 	},
 	after_dig_node = mech.after_dig,
-	on_punch = function(pos, node, puncher, pointed_thing)
-		mech.trigger(pos)
-		node.name = "mech:button_down"
-		core.swap_node(pos, node)
-		core.get_node_timer(pos):start(1)
-		core.sound_play("button_trigger", {pos = pos})
-	end,
 	on_rightclick = function(pos, node, puncher, itemstack, pointed_thing)
 		mech.trigger(pos)
 		node.name = "mech:button_down"
@@ -377,6 +371,7 @@ core.register_node("mech:button_down", {
 	paramtype = "light",
 	paramtype2 = "facedir",
 	walkable = false,
+	drop = "mech:button",
 	groups = {node = 1, cracky = 2, mech = 1, trigger = 1, not_in_creative_inventory = 1},
 	sounds = default.node_sound_metal_defaults(),
 	collision_box = {
@@ -407,6 +402,7 @@ core.register_node("mech:switch", {
 	paramtype = "light",
 	paramtype2 = "facedir",
 	walkable = false,
+	drop = "mech:switch",
 	groups = {node = 1, cracky = 2, trigger = 1},
 	sounds = default.node_sound_metal_defaults(),
 	collision_box = {
@@ -418,12 +414,6 @@ core.register_node("mech:switch", {
 		fixed = {{-1/4, -5/16, 1/4, 1/4, 5/16, 1/2}},
 	},
 	after_dig_node = mech.after_dig,
-	on_punch = function(pos, node, puncher, pointed_thing)
-		mech.trigger(pos)
-		node.name = "mech:switch_on"
-		core.swap_node(pos, node)
-		core.sound_play("button_trigger", {pos = pos})
-	end,
 	on_rightclick = function(pos, node, puncher, itemstack, pointed_thing)
 		mech.trigger(pos)
 		node.name = "mech:switch_on"
@@ -442,6 +432,7 @@ core.register_node("mech:switch_on", {
 	paramtype = "light",
 	paramtype2 = "facedir",
 	walkable = false,
+	drop = "mech:switch",
 	groups = {node = 1, cracky = 2, mech = 1, trigger = 1, not_in_creative_inventory = 1},
 	sounds = default.node_sound_metal_defaults(),
 	collision_box = {
