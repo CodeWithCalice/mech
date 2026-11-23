@@ -45,90 +45,65 @@ local rate_tbl = {}
 local rate_time = 1.0
 
 core.register_globalstep(function(dtime)
-	local t = table.copy(defer_tbl)
-	defer_tbl = {}
-	for _, item in pairs(t) do
-		item.func(item.pos)
-	end
+    local t = table.copy(defer_tbl)
+    defer_tbl = {}
 
-	-- prune rate_tbl occasionally
-	rate_time = rate_time - dtime
-	if rate_time > 0 then
-		return
-	end
-	rate_time = 1.0
+    for _, item in pairs(t) do
+        local node = core.get_node(item.pos)
+        local def = node and core.registered_nodes[node.name]
+        local callback = def and def[item.event]
 
-	-- simple decay prune
-	for k, v in pairs(rate_tbl) do
-		if v > 1 then
-			rate_tbl[k] = math.floor(v / 2)
-		else
-			rate_tbl[k] = nil
-		end
-	end
+        if callback then
+            callback(item.pos)
+        end
+    end
+
+    rate_time = rate_time - dtime
+    if rate_time > 0 then
+        return
+    end
+    rate_time = 1.0
+
+    for k, v in pairs(rate_tbl) do
+        if v > 1 then
+            rate_tbl[k] = math.floor(v / 2)
+        else
+            rate_tbl[k] = nil
+        end
+    end
 end)
 
-local function defer(pos, func)
-	local p = core.pos_to_string(pos)
+local function defer(pos, event)
+    local p = core.pos_to_string(pos)
+    local r = rate_tbl[p] or 1
+    rate_tbl[p] = r + 1
 
-	local r = rate_tbl[p] or 1
-	rate_tbl[p] = r + 1
-	if r > 15 then
-		return
-	end
+    if r > 15 then
+        return
+    end
 
-	defer_tbl[#defer_tbl + 1] = {pos = pos, func = func}
+    defer_tbl[#defer_tbl + 1] = {
+        pos = vector.new(pos),
+        event = event
+    }
 end
 
 function mech.send_trigger_to(pos)
-	local node = core.get_node(pos)
-	if node and core.registered_nodes[node.name] and
-			core.registered_nodes[node.name].on_trigger then
-		defer(pos, core.registered_nodes[node.name].on_trigger)
-	--[[elseif node and node.name ~= "air" and node.name ~= "nodes:placeholder" then
-		-- mech breaking
-		local def = core.registered_nodes[node.name]
-		local sounds = def.sounds or {}
-		if sounds.dug then
-			core.sound_play(sounds.dug, {pos = pos})
-		end
-		core.remove_node(pos)
-		core.check_for_falling(pos)
+    local node = core.get_node(pos)
+    local def = node and core.registered_nodes[node.name]
 
-		-- throw some particles around
-		if not def.tiles then
-			return
-		end
-		local texture = def.tiles and def.tiles[1] and def.tiles[1].name or
-		      def.tiles[1] or def.tiles or "dirt.png"
-		if type(texture) ~= "string" then
-			return
-		end
-		core.add_particlespawner({
-			amount = 16,
-			time = 0.05,
-			minpos = vector.add(pos, -0.5),
-			maxpos = vector.add(pos, 0.5),
-			minvel = {x = -0.4, y = -0.4, z = -0.4},
-			maxvel = {x = -0.4, y = -0.4, z = -0.4},
-			minacc = {x = 0, y = -10, z = 0},
-			maxacc = {x = 0, y = -10, z = 0},
-			minexptime = 0.3,
-			maxexptime = 0.7,
-			minsize = 1.0,
-			maxsize = 2.4,
-			collisiondetection = true,
-			texture = texture .. "^[sheet:4x4:" .. (rng(4)-1) .. "," .. (rng(4)-1)
-		})--]]
-	end
+    if def and def.on_trigger then
+        defer(pos, "on_trigger")
+    end
 end
 
 function mech.send_untrigger_to(pos)
-	local node = core.get_node(pos)
-	if node and core.registered_nodes[node.name] and
-			core.registered_nodes[node.name].on_untrigger then
-		defer(pos, core.registered_nodes[node.name].on_untrigger)
-	end
+    local node = core.get_node(pos)
+    local def = node and core.registered_nodes[node.name]
+
+    if def and def.on_untrigger then
+        defer(pos, "on_untrigger")
+    end
 end
 
 function mech.trigger(pos)
